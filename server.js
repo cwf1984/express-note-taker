@@ -41,22 +41,19 @@ app.post("/api/notes", (req, res) => {
     //day 2 -13
     //or is it req.body?
 
-    let addNewNote = {
-        title: req.body.title,
-        text: req.body.text,
-        // id: req.body.id
-    }
+    let addNewNote = req.body;
 
-    fs.readFileSync("/db/db.json", "utf8", (req, res) => {
+    
+    fs.readFileSync("db/db.json", "utf8", (req, res) => {
         if (err) throw err;
+
+        notes.push(addNewNote);
         
         res.json(JSON.parse(res));
 
-        notes.push(addNewNote);
-
-        fs.writeFileSync( "/db/db.json", JSON.stringify(addNewNote, null), (err) => {
+        fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
             if (err) throw err;
-            res.send(newUserNote);
+            res.send(addNewNote);
         })
 
 
@@ -67,11 +64,12 @@ app.post("/api/notes", (req, res) => {
 app.delete("/app/notes/:id", (req, res) => {
 
     //access :id from req.params.id
-
+    let noteId = req.params.id;
 
     //use FS module to read file and parse into real data for us to work with JSON.parse
-
-    // array splice method to remove by index - for loop 
+    fs.readFileSync("/db/db.json", "utf8", (err, data) => {
+        if (err) throw err;
+        json.parse(data);
 
     // use the Array.filter() method to filter out the matching element
     //2 options below
@@ -79,8 +77,13 @@ app.delete("/app/notes/:id", (req, res) => {
 
    myArray = myArray.filter( ({ id }) !== req.params.id);
 
-   //return any type of success message
+    fs.writeFileSync("/db/db.json", JSON.stringify(myArray, null), (err) => {
+        if (err) throw err;
+        res.send(db);
+        console.log("Your note has been deleted.")
+    })
 
+    })
 
 })
 
