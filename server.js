@@ -38,26 +38,30 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
 
     //params - signify id #s or ways to route not pass info
-    //day 2 -13
-    //or is it req.body?
 
     let addNewNote = req.body;
 
-    
-    fs.readFileSync("db/db.json", "utf8", (req, res) => {
+    notes.push(addNewNote);
+
+    fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
         if (err) throw err;
+        res.json(addNewNote);
+    })
 
-        notes.push(addNewNote);
+    // fs.readFileSync("db/db.json", "utf8", (req, res) => {
+    //     if (err) throw err;
+
+    //     notes.push(addNewNote);
         
-        res.json(JSON.parse(res));
+    //     res.json(JSON.parse(res));
 
-        fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
-            if (err) throw err;
-            res.send(addNewNote);
-        })
+    //     fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
+    //         if (err) throw err;
+    //         res.json(addNewNote);
+    //     })
 
 
-    });
+    // });
 
 });
 
@@ -73,9 +77,9 @@ app.delete("/app/notes/:id", (req, res) => {
 
     // use the Array.filter() method to filter out the matching element
     //2 options below
-    myArray = myArray.filer(element => element.id !== req.params.id);
+//     myArray = myArray.filer(element => element.id !== req.params.id);
 
-   myArray = myArray.filter( ({ id }) !== req.params.id);
+//    myArray = myArray.filter( ({ id }) !== req.params.id);
 
     fs.writeFileSync("/db/db.json", JSON.stringify(myArray, null), (err) => {
         if (err) throw err;
