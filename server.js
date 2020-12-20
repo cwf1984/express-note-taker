@@ -9,7 +9,7 @@ const path = require("path");
 const http = require("http");
 const fs = require("fs");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 //takes query bar and codes any variables out of it requested
@@ -30,66 +30,49 @@ app.get("/api/notes", (req, res) => {
 
     res.json(jsonHolder);
 
-    // return res.json(notes)
-
 })
 
 // send info back to server - creating new things on the server
 app.post("/api/notes", (req, res) => {
 
-    //params - signify id #s or ways to route not pass info
+    let addNewNote = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
-    let addNewNote = req.body;
+    let newNote = req.body;
 
-    notes.push(addNewNote);
+    let uniqueId = addNewNote.length;
 
-    fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
+    newNote.id = uniqueId;
+
+    addNewNote.push(newNote);
+
+
+    fs.writeFileSync( "./db/db.json", JSON.stringify(addNewNote), (err) => {
         if (err) throw err;
         res.json(addNewNote);
-    })
-
-    // fs.readFileSync("db/db.json", "utf8", (req, res) => {
-    //     if (err) throw err;
-
-    //     notes.push(addNewNote);
-        
-    //     res.json(JSON.parse(res));
-
-    //     fs.writeFileSync( "db/db.json", JSON.stringify(addNewNote, null), (err) => {
-    //         if (err) throw err;
-    //         res.json(addNewNote);
-    //     })
-
-
-    // });
+    });
 
 });
 
 app.delete("/app/notes/:id", (req, res) => {
+    
 
-    //access :id from req.params.id
     let noteId = req.params.id;
 
-    //use FS module to read file and parse into real data for us to work with JSON.parse
-    fs.readFileSync("/db/db.json", "utf8", (err, data) => {
+    let addNewNote = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+
+    const deleteThisNote = addNewNote.filter(deletedNote => deletedNote.id != noteId);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(deleteThisNote), (err) => {
+
         if (err) throw err;
-        json.parse(data);
 
-    // use the Array.filter() method to filter out the matching element
-    //2 options below
-//     myArray = myArray.filer(element => element.id !== req.params.id);
+        res.json(addNewNote);
 
-//    myArray = myArray.filter( ({ id }) !== req.params.id);
-
-    fs.writeFileSync("/db/db.json", JSON.stringify(myArray, null), (err) => {
-        if (err) throw err;
-        res.send(db);
-        console.log("Your note has been deleted.")
-    })
+        console.log("Your note has been deleted.");
 
     })
 
-})
+});
 
 
 //wild cards always last route
