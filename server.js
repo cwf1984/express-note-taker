@@ -46,10 +46,12 @@ app.post("/api/notes", (req, res) => {
     addNewNote.push(newNote);
 
 
-    fs.writeFileSync( "./db/db.json", JSON.stringify(addNewNote), (err) => {
+    fs.writeFile( "./db/db.json", JSON.stringify(addNewNote), (err) => {
         if (err) throw err;
         res.json(addNewNote);
     });
+
+    return addNewNote;
 
 });
 
@@ -62,7 +64,7 @@ app.delete("/app/notes/:id", (req, res) => {
 
     const deleteThisNote = addNewNote.filter(deletedNote => deletedNote.id != noteId);
 
-    fs.writeFileSync("./db/db.json", JSON.stringify(deleteThisNote), (err) => {
+    fs.writeFile("./db/db.json", JSON.stringify(deleteThisNote), (err) => {
 
         if (err) throw err;
 
