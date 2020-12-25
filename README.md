@@ -30,7 +30,7 @@ Below is an image of several notes that have been saved and can be read once cli
 ![Saved Notes](./assets/allnotes.png "Three Notes are Display")
 
 Below is an image demonstrating that the last note has been deleted.
-![Deleted Note](./assests/noteDeleted.png "Two Notes are Displayed")
+![Deleted Note](./assets/noteDeleted.png "Two Notes are Displayed")
 
 
 ## Credits
