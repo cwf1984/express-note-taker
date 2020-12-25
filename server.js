@@ -8,6 +8,9 @@ const cors = require("cors");
 const path = require("path");
 const http = require("http");
 const fs = require("fs");
+const { v4: uuidv4 } = require('uuid');
+
+
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -39,7 +42,7 @@ app.post("/api/notes", (req, res) => {
 
     let newNote = req.body;
 
-    let uniqueId = addNewNote.length;
+    let uniqueId = uuidv4();
 
     newNote.id = uniqueId;
 
@@ -55,12 +58,12 @@ app.post("/api/notes", (req, res) => {
 
 });
 
-app.delete("/app/notes/:id", (req, res) => {
+app.delete("/api/notes/:id", (req, res) => {
     
 
-    let noteId = req.params.id;
+    const noteId = req.params.id;
 
-    let addNewNote = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    const addNewNote = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
 
     const deleteThisNote = addNewNote.filter(deletedNote => deletedNote.id != noteId);
 
