@@ -13,9 +13,9 @@ Homework Week 11
 ## Installation
 
 Clone with SSH Key:
-git@github.com:cwf1984/work-day-scheduler.git
+git@github.com:cwf1984/express-note-taker.git
 
-Or use the URL listed below to pull up the live. 
+Or use the URL listed below to pull up the live page on Heroku. 
 
 ## Usage
 
@@ -62,4 +62,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ## URL
-https://cwf1984.github.io/work-day-scheduler/
+https://infinite-refuge-08662.herokuapp.com/
