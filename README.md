@@ -35,7 +35,7 @@ Below is an image demonstrating that the last note has been deleted.
 
 ## Credits
 
-As I have said with each preceding homework assignment, I want to thank Bootcamp Spot, the University of Washington and Trilogy Eduction for the assignment and code they provided. This assignment was very challenging, but luckily with help I completed it. Thank you to the instructor and TA's for their dedication, patience and help. I also want to give thanks to my tutor, Zach Auerbach, for his help.
+As I have said with each preceding homework assignment, I want to thank Bootcamp Spot, the University of Washington and Trilogy Eduction for the assignment and code they provided. This assignment was challenging, but luckily with help I completed it. Thank you to the instructor and TA's for their dedication, patience and help. I also want to give thanks to my tutor, Zach Auerbach, for his help.
 
 ## License
 
